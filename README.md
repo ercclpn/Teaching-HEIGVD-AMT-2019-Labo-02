@@ -19,6 +19,8 @@ During the lecture, I have mentioned that Stateless Session Beans (a kind of EJB
 
 Do you believe me? I don't want you to blindly trust me. You have to design an experiment to observe if that seems to be the case or not. Running an experiment is done in 3 steps. Firstly, you will need to write some code and formulate an hypothesis (doing this, you will learn how to write your first EJB and to call it from a servlet... viva la dependency injection). Secondly, you will need to create a test plan with JMeter and run it. Last and most importantly, you will need to read, analyze and interpret the results. Is the outcome of the JMeter test invalidating or validating your hypothesis? You need to be able to write this down and to explain it. Take the time to do it, it will save you time when time comes to write your project report.
 
+
+Dans cette étape, il a été décidé comme hypothèse que le serveur créererait au mieux 1 instance par utilisateur. Le résultat est que le serveur a créé plusieurs instances du counter mais qui a été partagé entre plusieurs utilisateurs. Le reset effectué au départ ne s'effectue pas sur toutes les instances existantes.
 ## Objective 3: design an experiment to study the impact of using the HTTP session in a servlet
 
 *This is an advanced step. If the first 2 steps were easy for you, you will have something a bit more challenging to do. If you don't manage to finish this last step, do not worry: we will come back to the topic during the lecture (but after that, you will need to be able to explain it!).*

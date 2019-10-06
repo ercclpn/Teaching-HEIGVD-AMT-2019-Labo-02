@@ -1,8 +1,10 @@
 package ch.heigvd.amt.mvcsimple.presentation;
 
 import ch.heigvd.amt.mvcsimple.business.QuoteGenerator;
+import ch.heigvd.amt.mvcsimple.business.local.CounterLocal;
 import ch.heigvd.amt.mvcsimple.model.Quote;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,19 +21,19 @@ import java.util.List;
 @WebServlet(name = "CounterServlet", urlPatterns = "/counter")
 public class CounterServlet extends javax.servlet.http.HttpServlet {
 
-    private int counter = 0;
+    @EJB
+    private CounterLocal counter;
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
 
         if("reset".equals(command)){
-            counter = 0;
+            counter.resetCounter();
         }else{
-            synchronized(this) {
-                counter += 1;
-            }
+            counter.incrementCounter();
+
         }
 
-        response.getWriter().println("This page has been accessed " + counter + " time(s).");
+        response.getWriter().println("This page has been accessed " + counter.getCounterValue() + " time(s).");
     }
 }
